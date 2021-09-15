@@ -6,9 +6,10 @@
 
 #define IS_BLACK(x) ((NULL == (x)) || (BLACK == (x)->colour))
 #define IS_RED(x) ((NULL != (x)) && (RED == (x)->colour))
+
 static tree_t tree_type;
 
-struct treenode{
+struct tree_node{
     char *key; /* a string of characters that represents the node */
     tree_colour colour; /* the colour of the node in the tree */
     tree left; 
@@ -89,13 +90,13 @@ int tree_search(tree t, char *str){
     }
 }
 
-int maxDepth(tree t) { /* finds the maximum depth of the tree */
+int tree_depth(tree t) { /* finds the maximum depth of the tree */
     int leftDepth, rightDepth;
     if (t == NULL) {
         return 0;
     }
-        leftDepth = maxDepth(t->left); /* finds all the nodes left and makes them equal to an int */
-        rightDepth = maxDepth(t->right); /* finds all the nodes right and makes them equal to an int */
+        leftDepth =  tree_depth(t->left); /* finds all the nodes left and makes them equal to an int */
+        rightDepth = tree_depth(t->right); /* finds all the nodes right and makes them equal to an int */
     if (leftDepth > rightDepth) { /* if the left side of the tree is deeper */
         return leftDepth + 1;
     } else { /* if the right side of the tree is deeper */
@@ -147,7 +148,9 @@ tree tree_fix (tree t) {
             t->left->colour = RED;
         }
     }
-    
+    /* Here after all the tree errors and cases have been resolved.
+    * The alterations to the root red node can be resolved here. 
+    */
     return t;
 }
 

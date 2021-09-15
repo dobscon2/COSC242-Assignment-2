@@ -20,10 +20,12 @@ int main(int argc, char* argv[]) {
     FILE *infile; 
     FILE *outfile;
     char *searchFile = NULL;
+    char *outputFile = NULL;
+    /* Boolean Flag Variables */
+    int output_to_dot = 0;
     int enable_rbt = 0;
     int print_depth = 0;
-    char *outputFile = NULL;
-    int output_to_dot = 0;
+
 
     clock_t fillStart, fillEnd;
     clock_t searchStart, searchEnd;
@@ -126,7 +128,7 @@ int main(int argc, char* argv[]) {
 
     if (searchFile == NULL) {
         if (print_depth == 1) {
-            int depth = maxDepth(t) - 1;
+            int depth = tree_depth(t) - 1;
             printf("%d\n", depth);
         }
     }
