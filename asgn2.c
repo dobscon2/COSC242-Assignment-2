@@ -120,7 +120,7 @@ int main(int argc, char* argv[]) {
 
             fprintf(stderr, "Fill time     : 2.6%f\n", (fillEnd - fillStart) / (double)CLOCKS_PER_SEC);
             fprintf(stderr, "Search time   : 2.6%f\n", (searchEnd - searchStart) / (double)CLOCKS_PER_SEC);
-            fprintf(stderr, "Unknwon words = 2.6%d\n", unknown_words);
+            fprintf(stderr, "Unknwon words = %d\n", unknown_words);
         }
     }
 
