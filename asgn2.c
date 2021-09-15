@@ -5,6 +5,7 @@
 #include "tree.h"
 #include "mylib.h"
 
+#define WORD_SIZE = 256;
 /* prints the end result of the program.
    @param int frequency to detect frequency of a word
    @param char *word, a string for the word to print 
@@ -15,22 +16,19 @@ static void print_info(int freq, char *word) {
 
 int main(int argc, char* argv[]) {
     const char *optstring = "c:df:orh"; /* a string determining the different character choices you can make. */
-    char option;
-    char word[256];
     FILE *infile; 
     FILE *outfile;
+    char option;
+    char word[WORD_SIZE];
     char *searchFile = NULL;
     char *outputFile = NULL;
     /* Boolean Flag Variables */
     int output_to_dot = 0;
     int enable_rbt = 0;
     int print_depth = 0;
-
-
     clock_t fillStart, fillEnd;
     clock_t searchStart, searchEnd;
     int unknown_words = 0;
-
     tree t;
 
     while((option = getopt(argc, argv, optstring)) != EOF) {
@@ -120,9 +118,9 @@ int main(int argc, char* argv[]) {
             searchEnd = clock();
             fclose(infile);
 
-            fprintf(stderr, "Fill time     : %f\n", (fillEnd - fillStart) / (double)CLOCKS_PER_SEC);
-            fprintf(stderr, "Search time   : %f\n", (searchEnd - searchStart) / (double)CLOCKS_PER_SEC);
-            fprintf(stderr, "Unknwon words = %d\n", unknown_words);
+            fprintf(stderr, "Fill time     : 2.6%f\n", (fillEnd - fillStart) / (double)CLOCKS_PER_SEC);
+            fprintf(stderr, "Search time   : 2.6%f\n", (searchEnd - searchStart) / (double)CLOCKS_PER_SEC);
+            fprintf(stderr, "Unknwon words = 2.6%d\n", unknown_words);
         }
     }
 
