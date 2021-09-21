@@ -163,6 +163,13 @@ int tree_search(tree t, char *str){
         return tree_search(t->right, str);
     }
 }
+
+tree rbt_insert(tree t, char *str) {
+    t = tree_insert(t, str);
+    t->colour = BLACK;
+    return t;
+}
+
 /*****************************************************************************
  * Function: tree_depth()
  * @param: tree t
@@ -235,6 +242,7 @@ tree tree_fix (tree t) {
             t->left->colour = RED;
         }
     }
+
     /* Here after all the tree errors and cases have been resolved.
     * The alterations to the root red node can be resolved here. 
     */

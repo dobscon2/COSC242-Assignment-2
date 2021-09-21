@@ -150,7 +150,11 @@ int main(int argc, char* argv[]) {
     }
     
     while (getword(word, sizeof word, stdin) != EOF) {
-        t = tree_insert(t, word);
+        if (enable_rbt == 1) {
+            t = rbt_insert(t, word);
+        } else {
+            t = tree_insert(t, word);
+        }
     }
 
     if (searchFile != NULL) { /* If there is a value entered for searchFile the timer variable ends! */

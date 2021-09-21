@@ -23,6 +23,7 @@ extern void tree_inorder(tree t, void f(char *str));
 extern void tree_preorder(tree t, void f(int freq, char *str));
 extern tree tree_insert(tree t, char *str);
 extern tree tree_new();
+extern tree rbt_insert(tree t, char *str);
 extern tree tree_fix();
 extern int tree_depth(tree t);
 extern int tree_search(tree t, char *str);
