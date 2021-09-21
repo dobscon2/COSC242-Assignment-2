@@ -25,7 +25,7 @@
 This constant sets the maximum size of the text file words which can be read 
 in from the command line as input.
 */
-#define WORD_SIZE = 256;
+#define WORD_SIZE 256
 
 /*****************************************************************************
 * Function:
