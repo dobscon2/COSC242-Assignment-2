@@ -184,7 +184,7 @@ int main(int argc, char* argv[]) {
 
             fprintf(stderr, "Fill time     : %f\n", (fillEnd - fillStart) / (double)CLOCKS_PER_SEC);
             fprintf(stderr, "Search time   : %f\n", (searchEnd - searchStart) / (double)CLOCKS_PER_SEC);
-            fprintf(stderr, "Unknwon words = %d\n", unknown_words);
+            fprintf(stderr, "Unknown words = %d\n", unknown_words);
         }
     }
     /* if the variable of search file is null and the print depth boolean flag has a value of 1.
