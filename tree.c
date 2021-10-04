@@ -1,4 +1,4 @@
-/*****************************************************************************
+/**
  * @file tree.c
  * @author Connor Dobson:   Student_ID: 1043665
  * @author Hayden Knox:     Student_ID: 2485875
@@ -11,20 +11,20 @@
  * left_rotate(), tree_search(), tree_depth(), tree_fix(), tree_preorder(). 
 
  * 
- * This file is also provides functions for creating dot representations of
+ * This file also provides functions for creating dot representations of
  * created BST or RBT data structures.
- *****************************************************************************/
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "tree.h"
 #include "mylib.h"
 
-/*****************************************************************************
- * IS_BLACK & IS_RED indicate state of tree data strucutre node colour.
- * These statments evaluate the colour individual tree node retains,
- * the use of these statments are  in the tree_fix function.
- *****************************************************************************/
+/**
+ * IS_BLACK & IS_RED indicate the state of tree data structure node colour.
+ * These statements evaluate the colour of individual tree data structure
+ * nodes, the use of these statements are in the tree_fix() function.
+*/
 
 #define IS_BLACK(x) ((NULL == (x)) || (BLACK == (x)->colour))
 #define IS_RED(x) ((NULL != (x)) && (RED == (x)->colour))
@@ -38,16 +38,16 @@ struct tree_node{
     tree right;
     int frequency;
 };
-/*****************************************************************************
+/**
  * Function: tree_new()
  * @param: int input
- * This is a variable of an int type is used to indicate if the to be created data 
+ * This is a variable of an int type indicates if the to be created data 
  * structure is a BST or an RBT.
  * Output: 
- * A tree data structure, ethier a RBT or a BST.
+ * A tree data structure, either an RBT or a BST.
  * Procedure: Allocates memory to the tree data structure; 
- * @return A null tree data structure (nod nodes or associated key values).
- *****************************************************************************/
+ * @return A null tree data structure (nodes or associated key values)
+ */
 tree tree_new(int input) { 
     if (input == 0) { 
         tree_type = BST;
@@ -57,7 +57,7 @@ tree tree_new(int input) {
     return NULL;
 }
 
-/****************************************************************************
+/**
  * Function: tree_insert()
  * @param: tree t, char *str
  * The t variable is a tree object where the strings are being inserted to.
@@ -70,7 +70,7 @@ tree tree_new(int input) {
  *
  *
  * If the tree is an RBT then it will assign the colour of that node to red
- * as every node being inserting into a RBT is assign red by default before
+ * as every node being inserting into an RBT is assign red by default before
  * any RBT fixups occur.
  *
  *
@@ -78,7 +78,7 @@ tree tree_new(int input) {
  * will increment its frequency variable.
  *
  * @return Will return a tree object with the string as a node in the tree.
- **************************************************************************/
+ */
 
 tree tree_insert(tree t, char *str) {
     int s;
@@ -111,15 +111,16 @@ tree tree_insert(tree t, char *str) {
     }
 }
 
-/*****************************************************************************
+/**
  * Function: left_rotate()
  * @param: tree t
- * This is a variable of data structure either a BST or an RBT.
+ * This is a data structure variable of either a BST or an RBT.
  * Output: 
- * A tree data structure, ethier a RBT or a BST.
+ * A tree data structure, either an RBT or a BST.
  * Procedure: This method left rotates the tree data structure 
- * @return: A node arrangment modified version of the input tree data structure. 
- *****************************************************************************/
+ * @return: A node rearrangement modified version of the input tree data
+ * structure. 
+*/
 static tree left_rotate(tree t) {
     tree temp;
     temp = t;
@@ -129,17 +130,17 @@ static tree left_rotate(tree t) {
     return t;
 }
 
-/*****************************************************************************
+/**
  * Function: right_rotate()
  * @param: tree t
- * This is a variable of data structure either a BST or an RBT.
+ * This is a data structure variable of either a BST or an RBT.
  * Output: 
- * A tree data structure, ethier a RBT or a BST.
+ * A tree data structure, either an RBT or a BST.
  * Procedure: This method right rotates the tree data structure 
- * @return: A node arrangment modified version of the input tree data structure. 
- *****************************************************************************/
+ * @return: A node rearrangement modified version of the input tree data
+ * structure. 
+*/
 static tree right_rotate(tree t) {
-    /*same as left but swap left for right*/
     tree temp; 
     temp = t; 
     t = t->left; 
@@ -148,31 +149,33 @@ static tree right_rotate(tree t) {
     return t;
 }
 
-/*****************************************************************************
+/**
  * Function: tree_search()
  * @param: tree t
- * This is a variable of data structure either a BST or an RBT.
+ * This is a data structure variable of either a BST or an RBT.
  * @param: str* 
- * The varialbe *str is a pointer to the char value which is passed as a parameter
+ * The variable *str is a pointer to the char value passed as a parameter
  * for the data structure traversal. 
  * Output: and int data type to a recursive function call.
- * A tree data structure, ethier a RBT or a BST.
+ * A tree data structure, either an RBT or a BST.
  * Procedure: 
- * The tree_search() method is used to traverse the input tree data structure and
- * reading input by evaluating key char variable values to the keys strings present 
- * withing the tree data structures current tree node. There are three cases which 
- * can executed depending on the various if statements. If the if() comparison
- * returns true for any if staement. The if() statement returns a recursive method call
- * for either left or right tree key node left or right subtree traversal.
- * If the traversal search() function encounters a NUll tree or subtree it will 
- * return 0 as this value is indicative of an intraversable path. If the functions 
- * traverses to a node and its key matches the value provided as input the function 
- * returns 1. If the nodes key exceeds the character asci character input
+ * The tree_search() method is used to traverse the input tree data structure
+ * and reading input by evaluating key char variable values to the keys strings
+ * present within the tree data structures current tree node. There are three
+ * cases which can be executed depending on the various if statements. If the
+ * if() comparison returns true for any if statement. The if() statement
+ * returns a recursive method call for either left or right tree key node left
+ * or right subtree traversal. If the traversal search() function encounters
+ * a NULL tree or sub-tree it will return 0 as this value is indicative of an
+ * untraversable path. If the functions traverses to a node and its key
+ * matches the value provided as input the function 
+ * returns 1. If the node's key exceeds the character asci character input
  * key we return the result of searching the left subtree. If the key is to 
  * small the method returns the result of searching the right subtree.
- * @return A recursive tree_search() call to either the left or right subtree of a
- * data structure.
- *****************************************************************************/
+ * 
+ * @return A recursive tree_search() call to either the left or right subtree
+ * of a data structure.
+ */
 int tree_search(tree t, char *str){
     if (t == NULL) {
         return 0;
@@ -187,11 +190,11 @@ int tree_search(tree t, char *str){
     }
 }
 
-/***************************************************************************
+/**
  * Function: rbt_insert()
  * @param: tree t, char *str
  * The t variable is a tree object which should be an RBT type.
- * The *str pointer contains the string which is being inserted into
+ * The *str pointer contains the string value inserted into
  * the tree.
  *
  *
@@ -206,7 +209,7 @@ int tree_search(tree t, char *str){
  * This function is only called when the tree is an RBT
  *
  * @return a complete tree object with the root node black.
- **************************************************************************/
+ */
 
 tree rbt_insert(tree t, char *str) {
     t = tree_insert(t, str);
@@ -214,20 +217,20 @@ tree rbt_insert(tree t, char *str) {
     return t;
 }
 
-/*****************************************************************************
+/**
  * Function: tree_depth()
  * @param: tree t
- * This is a variable of data structure either a BST or an RBT.
- * Output  : int
+ * This is a data structure variable of either a BST or an RBT.
+ * Output: int
  * Procedure: This function traverses the left and right subtrees of the tree 
  * data structure and using recursive calls to the tree_depth function 
- * increments the total node sum for both the left and right subtrees. Then 
- * afterwars compars the total values for the depth of the left and right 
- * subtrees returns the maximum int value of either the left or right subtree
+ * increments the total node sum for both the left and right subtrees.
+ * Then afterward compares the total values for the depth of the left and right 
+ * subtrees returning the maximum int value of either the left or right subtree
  * data structure.
- * @return the maximum tree depth value of ether the left or right subtree
+ * @return the maximum tree depth value of either the left or right subtree
  * data structure. 
- *****************************************************************************/
+ */
 int tree_depth(tree t) {
     int leftDepth, rightDepth;
     if (t == NULL) {
@@ -242,8 +245,7 @@ int tree_depth(tree t) {
     }
 }
 
-/***************************************************************************
- * Function: tree_fix()
+/**
  * @param: tree t
  * This is a variable of data structure either a BST or an RBT
  *
@@ -252,7 +254,7 @@ int tree_depth(tree t) {
  * any RBT violations.
  *
  * @return a valid RBT tree.
- **************************************************************************/
+ */
 
 tree tree_fix (tree t) {
     if (IS_RED(t->left) && IS_RED(t->left->left)) {
@@ -302,16 +304,16 @@ tree tree_fix (tree t) {
     return t;
 }
 
-/***************************************************************************
+/**
  * Function: tree_preorder()
  * @param: tree t, void f()
- * The t variable contains the tree that is being traversed.
+ * The variable t contains the tree that the function traverses.
  * A void function is also passed through as an argument, this is typically
  * a print function to print out the nodes in order of being traversed.
  *
  * Procedure: This function traverses the tree by using the
  * preorder approach.
- **************************************************************************/
+ */
 void tree_preorder(tree t, void f(int freq, char *str)){
     if(t == NULL){
         return;
@@ -362,18 +364,18 @@ void tree_output_dot(tree t, FILE *out) {
     fprintf(out, "}\n");
 }
 
-/*****************************************************************************
+/**
  * Function: tree_free()
  * @param: tree t
- * This is variable of an instance of a tree data structure which has already 
+ * This is an instance variable of a tree data structure that has already 
  * been created.
  * Output: 
  * A tree data structure. with no data.
- * Procedure: This function traverses the created tree and dallocates memory to
+ * Procedure: This function traverses the created tree and deallocates memory to
  * each tree node in the data structure.
- *****************************************************************************/
+ */
 tree tree_free(tree t){
-    if (t == NULL){ /* if there's nothing to free, do nothing */
+    if (t == NULL){
         return NULL;
     }
     tree_free(t->right);

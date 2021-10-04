@@ -1,6 +1,6 @@
-/*****************************************************************************
+/**
  * @file tree.h
- * @author Connor Dobson:   Student_ID: 
+ * @author Connor Dobson:   Student_ID: 1043665
  * @author Hayden Knox:     Student_ID: 2485875
  * @author Jakub Sawicki:   Student_ID:  
  * 
@@ -10,7 +10,7 @@
  * This provides access to methods such as tree_new(), tree_insert(), 
  * right_rotate(), left_rotate(), tree_search(), tree_depth(), tree_fix(),
  * tree_preorder(). 
- *****************************************************************************/
+ */
 
 #ifndef TREE_H_
 #define TREE_H_

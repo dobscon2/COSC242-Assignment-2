@@ -4,7 +4,6 @@
 #include <assert.h>
 #include <ctype.h>
 
-/* allocates memory */
 void *emalloc(size_t s){
     void *result = malloc(s);
     if(NULL == result){
@@ -14,7 +13,6 @@ void *emalloc(size_t s){
     return result;
 }
 
-/* reallocates memory when we need more size */
 void *erealloc(void *p, size_t s){
     void *result = realloc(p, s);
     if(NULL == result){
@@ -28,8 +26,6 @@ int getword(char *s, int limit, FILE *stream){
     int c;
     char *w = s;
     assert(limit > 0 && s !=NULL && stream != NULL);
-
-    /*skip to start of word*/
     while(!isalnum(c = getc(stream)) && EOF != c);
 
     if (EOF == c) {
