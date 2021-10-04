@@ -57,6 +57,29 @@ tree tree_new(int input) {
     return NULL;
 }
 
+/****************************************************************************
+ * Function: tree_insert()
+ * @param: tree t, char *str
+ * The t variable is a tree object where the strings are being inserted to.
+ * The *str pointer contains the string being inserted into that tree.
+ *
+ * Procedure:
+ * This function is responsible for inserting strings into our tree object.
+ * If the tree object is null then the function will allocate space to
+ * hold the string into the tree.
+ *
+ *
+ * If the tree is an RBT then it will assign the colour of that node to red
+ * as every node being inserting into a RBT is assign red by default before
+ * any RBT fixups occur.
+ *
+ *
+ * If we are trying to insert a string that is already in the tree then we
+ * will increment its frequency variable.
+ *
+ * @return Will return a tree object with the string as a node in the tree.
+ **************************************************************************/
+
 tree tree_insert(tree t, char *str) {
     int s;
     if(t == NULL) {
@@ -164,6 +187,27 @@ int tree_search(tree t, char *str){
     }
 }
 
+/***************************************************************************
+ * Function: rbt_insert()
+ * @param: tree t, char *str
+ * The t variable is a tree object which should be an RBT type.
+ * The *str pointer contains the string which is being inserted into
+ * the tree.
+ *
+ *
+ * Procedure:
+ * This function calls the tree_insert() function recursively to insert the
+ * strings as nodes in the tree. When it has finished recursively inserting
+ * the strings into the string, it would naturally be at the root node at
+ * the end of the recursion.
+ *
+ * We will change that root node to black to make the RBT a valid tree.
+ *
+ * This function is only called when the tree is an RBT
+ *
+ * @return a complete tree object with the root node black.
+ **************************************************************************/
+
 tree rbt_insert(tree t, char *str) {
     t = tree_insert(t, str);
     t->colour = BLACK;
@@ -197,6 +241,18 @@ int tree_depth(tree t) {
         return rightDepth + 1;
     }
 }
+
+/***************************************************************************
+ * Function: tree_fix()
+ * @param: tree t
+ * This is a variable of data structure either a BST or an RBT
+ *
+ * Procedure: This function is responsible for the RBT fixups.
+ * This function goes through a series of if statements to check if there
+ * any RBT violations.
+ *
+ * @return a valid RBT tree.
+ **************************************************************************/
 
 tree tree_fix (tree t) {
     if (IS_RED(t->left) && IS_RED(t->left->left)) {
@@ -246,6 +302,16 @@ tree tree_fix (tree t) {
     return t;
 }
 
+/***************************************************************************
+ * Function: tree_preorder()
+ * @param: tree t, void f()
+ * The t variable contains the tree that is being traversed.
+ * A void function is also passed through as an argument, this is typically
+ * a print function to print out the nodes in order of being traversed.
+ *
+ * Procedure: This function traverses the tree by using the
+ * preorder approach.
+ **************************************************************************/
 void tree_preorder(tree t, void f(int freq, char *str)){
     if(t == NULL){
         return;
