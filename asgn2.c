@@ -65,7 +65,6 @@ static void print_info(int freq, char *word) {
  * This function returns EXIT_SUCCESS if the program is successful.
  ***************************************************************************/
 int main(int argc, char* argv[]) {
-    /* a string determining the different character choices you can make. */
     const char *optstring = "c:df:orh";
     FILE *infile; 
     FILE *outfile;
@@ -73,15 +72,9 @@ int main(int argc, char* argv[]) {
     char word[WORD_SIZE];
     char *searchFile = NULL;
     char *outputFile = NULL;
-    /* Boolean Flag Variables
-    - This variable selection is key to determining if a RBT is to be created.*/
     int output_to_dot = 0;
     int enable_rbt = 0;
-    int print_depth = 0;
-    /* These variables are used to calculate to total amount of time required
-    to complete building a data structure and the amount of time needed to search a data
-    structure for the user chosen key. 
-    */ 
+    int print_depth = 0; 
     clock_t fillStart, fillEnd;
     clock_t searchStart, searchEnd;
     int unknown_words = 0;
@@ -89,26 +82,22 @@ int main(int argc, char* argv[]) {
 
     while((option = getopt(argc, argv, optstring)) != EOF) {
         switch (option) {
-            case 'c': /* for activating the timer */
+            case 'c':
                 searchFile = optarg;
                 break;
-            case 'd': /* This input character in the command line prints the depth of 
-                        the tree data structure */
+            case 'd':
                 print_depth = 1;
                 break; 
-            case 'f': /* This input character in the command line writes the dot 
-                        output to filename */
+            case 'f':
                 outputFile = optarg;
                 break;
-            case 'o': /* This input character in the command line outputs the 
-                        representation of the tree in dot form */
+            case 'o':
                 output_to_dot = 1;
                 break;
-            case 'r': /* This input character in the command line creates an RBT instead of a BST */
+            case 'r':
                 enable_rbt = 1;
                 break;
-            case 'h': /* This input character in the command line prints out the help message describing 
-                         how the grogram works*/
+            case 'h':
                 fprintf(stderr, "Usage: %s [OPTION]... <STDIN>\n", argv[0]);
                 fprintf(stderr, "\n");
                 fprintf(stderr, "Perform various operations using a binary tree. By default, words\nare read from stdin and added to the tree, before being printed out\nalongside their frequencies to stdout.\n\n");
@@ -138,14 +127,12 @@ int main(int argc, char* argv[]) {
     }
         
     if (enable_rbt == 1) {
-        /* Create a new tree with RBT characteristics */
         t = tree_new(enable_rbt);
     } else {
-        /* Create a new tree with BST characteristics */
         t = tree_new(enable_rbt);
     }
 
-    if (searchFile != NULL) { /* If there is a value entered for searchFile the timer variable begins! */
+    if (searchFile != NULL) {
         fillStart = clock();
     }
     
@@ -157,7 +144,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    if (searchFile != NULL) { /* If there is a value entered for searchFile the timer variable ends! */
+    if (searchFile != NULL) {
         fillEnd = clock();
     }
 
@@ -168,7 +155,7 @@ int main(int argc, char* argv[]) {
     fflush(stdin);
 
     if (searchFile != NULL) {
-        if (NULL == (infile = fopen(searchFile, "r"))) { /* if we can't find the file to search, end program with a fail */
+        if (NULL == (infile = fopen(searchFile, "r"))) {
             fprintf(stderr, "Can't find file %s\n", optarg); 
             return EXIT_FAILURE;
         } else {
@@ -187,8 +174,7 @@ int main(int argc, char* argv[]) {
             fprintf(stderr, "Unknown words = %d\n", unknown_words);
         }
     }
-    /* if the variable of search file is null and the print depth boolean flag has a value of 1.
-    the tree data structure depth is printed in the terminal. */
+   
     if (searchFile == NULL) {
         if (print_depth == 1) {
             int depth = tree_depth(t) - 1;

@@ -32,11 +32,11 @@
 static tree_t tree_type;
 
 struct tree_node{
-    char *key; /* a string of characters that represents the node */
-    tree_colour colour; /* the colour of the node in the tree */
+    char *key;
+    tree_colour colour;
     tree left; 
     tree right;
-    int frequency; /*update whenever duplicate item is added*/
+    int frequency;
 };
 /*****************************************************************************
  * Function: tree_new()
@@ -54,34 +54,34 @@ tree tree_new(int input) {
     } else if (input == 1) {
         tree_type = RBT;
     }
-    return NULL; /*creates an empty tree*/
+    return NULL;
 }
 
 tree tree_insert(tree t, char *str) {
     int s;
-    if(t == NULL){ /* if we are starting with an empty tree */
-        t = emalloc(sizeof *t); /* allocates memory for the tree */
-        t->key = emalloc((strlen(str)+1) * sizeof t->key[0]); /* allocates memory for the length of the key */
+    if(t == NULL) {
+        t = emalloc(sizeof *t);
+        t->key = emalloc((strlen(str)+1) * sizeof t->key[0]);
         t->right = NULL;
         t->left = NULL;
         t->frequency = 1;
         if (tree_type == RBT) { 
-            t->colour = RED; /* set default tree colour to red, before we call tree_fix */
+            t->colour = RED;
         }
-        strcpy(t->key,str); /* creates the first key by copying str to t->key */
-    } else { /* if our tree has more than zero elements */
-        s = strcmp(str, t->key); /* compares the two strings to see whether they are identical */
-        if(s == 0){ /* if we have an identical string */
-            t->frequency++; /*updates when duplicate item is added*/
+        strcpy(t->key,str);
+    } else {
+        s = strcmp(str, t->key);
+        if(s == 0) {
+            t->frequency++;
         } else if(s < 0){  
-            t->left = tree_insert(t->left, str); /* adds left */
+            t->left = tree_insert(t->left, str);
         } else if(s > 0){
-            t->right = tree_insert(t->right,str); /* adds right */
+            t->right = tree_insert(t->right,str);
         }
     }
     
     if (tree_type == RBT) {
-        t = tree_fix(t);  /* will allocate the correct colour to a tree node */
+        t = tree_fix(t);
         return t; 
     } else {
     return t;
@@ -151,15 +151,15 @@ static tree right_rotate(tree t) {
  * data structure.
  *****************************************************************************/
 int tree_search(tree t, char *str){
-    if (t == NULL) { /* there will be nothing to search */
+    if (t == NULL) {
         return 0;
     }
 
-    if (strcmp(str, t->key) == 0) { /* if our comparison is the same, return success */
+    if (strcmp(str, t->key) == 0) {
         return 1;
     } else if (strcmp(str, t->key) < 0) {
-        return tree_search(t->left, str); /* search to the left */
-    } else { /* if all else fails, we must search right */
+        return tree_search(t->left, str);
+    } else {
         return tree_search(t->right, str);
     }
 }
@@ -184,16 +184,16 @@ tree rbt_insert(tree t, char *str) {
  * @return the maximum tree depth value of ether the left or right subtree
  * data structure. 
  *****************************************************************************/
-int tree_depth(tree t) { /* finds the maximum depth of the tree */
+int tree_depth(tree t) {
     int leftDepth, rightDepth;
     if (t == NULL) {
         return 0;
     }
-        leftDepth =  tree_depth(t->left); /* finds all the nodes left and makes them equal to an int */
-        rightDepth = tree_depth(t->right); /* finds all the nodes right and makes them equal to an int */
-    if (leftDepth > rightDepth) { /* if the left side of the tree is deeper */
+        leftDepth =  tree_depth(t->left);
+        rightDepth = tree_depth(t->right);
+    if (leftDepth > rightDepth) {
         return leftDepth + 1;
-    } else { /* if the right side of the tree is deeper */
+    } else {
         return rightDepth + 1;
     }
 }
@@ -242,10 +242,7 @@ tree tree_fix (tree t) {
             t->left->colour = RED;
         }
     }
-
-    /* Here after all the tree errors and cases have been resolved.
-    * The alterations to the root red node can be resolved here. 
-    */
+    
     return t;
 }
 
