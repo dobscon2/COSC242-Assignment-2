@@ -24,9 +24,9 @@
 #include "mylib.h"
 
 /**
-This constant sets the maximum size of the text file words which can be read 
-in from the command line as input.
-*/
+ * This constant sets the maximum size of the text file words which can be read 
+ * in from the command line as input.
+ */
 #define WORD_SIZE 256
 
 /**
@@ -36,10 +36,10 @@ in from the command line as input.
 * @param int frequency to detect frequency of a word
 * @param char *word, a string for the word to print 
 */
+
 static void print_info(int freq, char *word) {
     printf("%-4d %s\n", freq, word);
 }
-
 
 /**
  * Function: 
@@ -67,6 +67,7 @@ static void print_info(int freq, char *word) {
  * @return:
  * This function returns EXIT_SUCCESS if the program is successful.
  */
+
 int main(int argc, char* argv[]) {
     const char *optstring = "c:df:orh";
     FILE *infile; 

@@ -13,7 +13,8 @@
  * 
  * This file also provides functions for creating dot representations of
  * created BST or RBT data structures.
-*/
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,7 +25,7 @@
  * IS_BLACK & IS_RED indicate the state of tree data structure node colour.
  * These statements evaluate the colour of individual tree data structure
  * nodes, the use of these statements are in the tree_fix() function.
-*/
+ */
 
 #define IS_BLACK(x) ((NULL == (x)) || (BLACK == (x)->colour))
 #define IS_RED(x) ((NULL != (x)) && (RED == (x)->colour))
@@ -38,6 +39,7 @@ struct tree_node{
     tree right;
     int frequency;
 };
+
 /**
  * Function: tree_new()
  * @param: int input
@@ -120,7 +122,8 @@ tree tree_insert(tree t, char *str) {
  * Procedure: This method left rotates the tree data structure 
  * @return: A node rearrangement modified version of the input tree data
  * structure. 
-*/
+ */
+
 static tree left_rotate(tree t) {
     tree temp;
     temp = t;
@@ -139,7 +142,8 @@ static tree left_rotate(tree t) {
  * Procedure: This method right rotates the tree data structure 
  * @return: A node rearrangement modified version of the input tree data
  * structure. 
-*/
+ */
+
 static tree right_rotate(tree t) {
     tree temp; 
     temp = t; 
@@ -231,6 +235,7 @@ tree rbt_insert(tree t, char *str) {
  * @return the maximum tree depth value of either the left or right subtree
  * data structure. 
  */
+
 int tree_depth(tree t) {
     int leftDepth, rightDepth;
     if (t == NULL) {
@@ -314,6 +319,7 @@ tree tree_fix (tree t) {
  * Procedure: This function traverses the tree by using the
  * preorder approach.
  */
+
 void tree_preorder(tree t, void f(int freq, char *str)){
     if(t == NULL){
         return;
@@ -330,6 +336,7 @@ void tree_preorder(tree t, void f(int freq, char *str)){
  * @param t the tree to output a DOT description of.
  * @param out the stream to write the DOT output to.
  */
+
 static void tree_output_dot_aux(tree t, FILE *out) {
     if(t->key != NULL) {
         fprintf(out, "\"%s\"[label=\"{<f0>%s:%d|{<f1>|<f2>}}\"color=%s];\n",
@@ -358,6 +365,7 @@ static void tree_output_dot_aux(tree t, FILE *out) {
  * @param t the tree to output the DOT description of.
  * @param out the stream to write the DOT description to.
  */
+
 void tree_output_dot(tree t, FILE *out) {
     fprintf(out, "digraph tree {\nnode [shape = Mrecord, penwidth = 2];\n");
     tree_output_dot_aux(t, out);
@@ -374,6 +382,7 @@ void tree_output_dot(tree t, FILE *out) {
  * Procedure: This function traverses the created tree and deallocates memory to
  * each tree node in the data structure.
  */
+
 tree tree_free(tree t){
     if (t == NULL){
         return NULL;
