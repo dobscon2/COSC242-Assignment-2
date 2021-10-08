@@ -2,7 +2,7 @@
  * @file asgn2.c
  * @author Connor Dobson:   Student_ID: 1043665
  * @author Hayden Knox:     Student_ID: 2485875
- * @author Jakub Sawicki:   Student_ID:  
+ * @author Jakub Sawicki:   Student_ID: 5580766
  * 
  * This program is used to create a new instance of a BST (Binary search tree)
  * or an RBT (Red Black Tree). This program accepts input from the Linux
