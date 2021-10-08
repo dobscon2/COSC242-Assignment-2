@@ -24,18 +24,19 @@
 #include "mylib.h"
 
 /**
+ * Define: 
  * This constant sets the maximum size of the text file words which can be read 
  * in from the command line as input.
  */
 #define WORD_SIZE 256
 
 /**
-* Function:
-* This function is passed as a parameter to the tree_preorder method and 
-* prints the result of the program.
-* @param int frequency to detect frequency of a word
-* @param char *word, a string for the word to print 
-*/
+ * Function:
+ * This function is passed as a parameter to the tree_preorder method and 
+ * prints the result of the program.
+ * @param int frequency to detect frequency of a word
+ * @param char *word, a string for the word to print 
+ */
 
 static void print_info(int freq, char *word) {
     printf("%-4d %s\n", freq, word);
